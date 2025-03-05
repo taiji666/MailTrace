@@ -1,0 +1,28 @@
+{
+    "client_id": {
+        "guid": {
+            "guid": "guid",
+            "ip": "ip",
+            "country": "country",
+            "province": "province",
+            "city": "city",
+            "district": "district",
+            "time": "time",
+            "image_id": "image_id",
+            "user_agent": "user_agent"
+        }
+    },
+    "888": {
+        "1212": {
+            "guid": "1212",
+            "ip": "127.0.0.1",
+            "country": "",
+            "province": "",
+            "city": "",
+            "district": "",
+            "time": "2025-03-04 21:04:45",
+            "image_id": "1",
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+        }
+    }
+}

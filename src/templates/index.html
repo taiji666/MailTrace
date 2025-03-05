@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="邮件追踪系统，跟踪邮件打开状态和位置数据">
+    <meta name="keywords" content="邮件, 追踪, 状态, 数据">
+    <title>邮件追踪系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="page-container">
+    <header class="app-header">
+        <div class="container">
+            <h1 class="app-title">
+                <i class="fas fa-envelope-open-text"></i>
+                邮件追踪系统
+            </h1>
+            <p class="app-subtitle">跟踪您的邮件打开状态和位置数据</p>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <div class="alert alert-danger fade" id="errorAlert" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <span id="errorMessage"></span>
+            <button type="button" class="btn-close" onclick="closeAlert()" aria-label="关闭警告"></button>
+        </div>
+
+        <div class="alert alert-success fade" id="successAlert" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            <span id="successMessage"></span>
+            <button type="button" class="btn-close" onclick="closeAlert()" aria-label="关闭成功消息"></button>
+        </div>
+
+        <!-- 查询表单 -->
+        <div class="card card-query">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-search me-2"></i>查询追踪信息
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="queryForm" onsubmit="event.preventDefault();">
+                    <div class="mb-4 form-group">
+                        <label for="clientId" class="form-label">Client ID</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-fingerprint"></i></span>
+                            <input type="text" class="form-control" id="clientId" placeholder="请输入Client ID" required
+                                   aria-label="Client ID">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-search me-2"></i>查询
+                    </button>
+                </form>
+
+                <div class="result-container mt-4">
+                    <div class="result-header" id="resultHeader">
+                        <h5>查询结果</h5>
+                        <span class="badge bg-primary" id="resultCount">0</span>
+                    </div>
+                    <div class="table-responsive result-table">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>GUID</th>
+                                <th>IP</th>
+                                <th>位置</th>
+                                <th>时间</th>
+                                <th>图片ID</th>
+                            </tr>
+                            </thead>
+                            <tbody id="queryResult"></tbody>
+                        </table>
+                    </div>
+                    <div class="no-results" id="noResults">
+                        <i class="fas fa-search"></i>
+                        <p>暂无查询结果</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图片链接生成器 -->
+        <div class="card card-generator">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-link me-2"></i>生成追踪链接
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="linkForm" onsubmit="event.preventDefault();">
+                    <div class="mb-4 form-group">
+                        <label for="imageSelect" class="form-label">选择图片</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-image"></i></span>
+                            <select class="form-select" id="imageSelect" required aria-label="选择图片">
+                                <option value="">请选择图片</option>
+                                <option value="1">太极图</option>
+                                <option value="2">Webmail图</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-4 form-group">
+                        <label for="clientIdInput" class="form-label">Client ID</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-fingerprint"></i></span>
+                            <input type="text" class="form-control" id="clientIdInput" placeholder="请输入Client ID"
+                                   required aria-label="Client ID">
+                        </div>
+                    </div>
+                    <div class="mb-4 form-group">
+                        <label for="guidInput" class="form-label">GUID</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            <input type="text" class="form-control" id="guidInput" placeholder="请输入或生成GUID"
+                                   required aria-label="GUID">
+                            <button class="btn btn-outline-secondary" type="button" id="generateGuid"
+                                    aria-label="生成GUID">
+                                <i class="fas fa-dice"></i> 生成
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-magic me-2"></i>生成链接
+                    </button>
+                </form>
+
+                <div class="generated-link mt-4" id="linkResult">
+                    <label class="form-label">生成的追踪链接</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="generatedLink" readonly aria-label="生成的追踪链接">
+                        <button class="btn btn-success copy-btn" type="button" id="copyButton" aria-label="复制链接">
+                            <i class="fas fa-copy me-2"></i>复制
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container">
+            <p>© 2025 邮件追踪系统 - 安全高效的邮件追踪解决方案</p>
+        </div>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
