@@ -17,6 +17,7 @@
 在邮件中嵌入HTML图片链接
    ```html
     <img src=" https://www.doit.ip-ddns.com/image/2/?guid=ceshi&client_id=ceshi" >
-   ```  
+   ```
+在网页中搜索client_id即可查询邮件状态
 ### **注意**
 发送邮件**包含追踪信息**，通过嵌入的邮箱追踪像素实现已读状态检测。是否成功追踪取决于收件人客户端的图片加载策略。
