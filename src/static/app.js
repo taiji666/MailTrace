@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (results.length > 0) {
             results.forEach(item => {
                 const row = document.createElement('tr');
-                
+                const user_agent = item.user_agent ;
                 const location = [
                     item.country || '', 
                     item.province || '', 
@@ -100,6 +100,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${item.ip || '---'}</td>
                     <td>${location || '未知'}</td>
                     <td>${formatDateTime(item.time) || '---'}</td>
+                    <td>${user_agent || '---'}</td>
+                    <td>${item.client_id || '---'}</td>
                     <td>${item.image_id || '---'}</td>
                 `;
                 elements.queryResult.appendChild(row);

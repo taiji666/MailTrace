@@ -105,7 +105,7 @@ async def get_image(
     image_path = _get_image_path(image_id)
     client_ip = request.client.host
     real_ip = request.headers.get("x-forwarded-for", "").split(",")[0]
-    queried_ip = QueryIP(client_ip)
+    queried_ip = QueryIP(real_ip)
     ip_info = queried_ip.query()
     user_agent = request.headers.get("user-agent")
 
@@ -115,7 +115,7 @@ async def get_image(
     if guid and client_id and ip_info:
         guid_json[client_id][guid] = {
             "guid": guid,
-            "ip": client_ip,
+            "ip": real_ip,
             "country": ip_info["country"],
             "province": ip_info["province"],
             "city": ip_info["city"],
@@ -127,7 +127,7 @@ async def get_image(
     else:
         guid_json[client_id][guid] = {
             "guid": guid,
-            "ip": client_ip,
+            "ip": real_ip,
             "country": "",
             "province": "",
             "city": "",

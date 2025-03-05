@@ -24,5 +24,18 @@
             "image_id": "1",
             "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
         }
+    },
+    "hfd": {
+        "khkh": {
+            "guid": "khkh",
+            "ip": "",
+            "country": "",
+            "province": "",
+            "city": "",
+            "district": "",
+            "time": "2025-03-05 15:00:38",
+            "image_id": "1",
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+        }
     }
 }
