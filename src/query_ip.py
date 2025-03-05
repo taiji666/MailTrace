@@ -1,5 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
 import json
 
 
@@ -13,8 +12,7 @@ class QueryIP:
 
     def query(self):
         response = requests.get(self.url, headers=self.headers)
-        soup = BeautifulSoup(response.text, "html.parser")
-        result = json.loads(soup.text)
+        result = json.loads(response.text)
         try:
             ip_info = {
                 "ip": result["data"]["ip"],
